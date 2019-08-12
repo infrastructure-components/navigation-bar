@@ -1,71 +1,83 @@
 import React from 'react';
 import styled from 'styled-components';
+import { IRoute, withRoutes } from 'infrastructure-components';
+import { Link } from 'react-router-dom';
+
+/** fixed height of the navbar*/
+const navBarHeight = "1em";
 
 /**
- * A styled frame for our page
+ * A styled navigation bar.
  */
-export const Frame = styled.div`
-    
-    /* just a test to see whether our styling works */
-    background-color: red;
-    
-`;
-
-/**
- * A styled navigation bar. Base code shared by TopNavBar and Footer
- */
-export const NavBar = styled.div`
-    background-color: gray;
-    overflow: hidden;
-    
-    
-`;
-
-export const TopNavBar = styled(NavBar)`
-    position: absolute;
+export const NavBar = styled.div`   
+    /** fixes the navbar to the top */
+    position: fixed;
     top:0;
+    
+    /** let the navbar take the whole width and do not scroll horizontally */
+    display: block;
+    overflow: hidden;
     width:100%;
+    
+    /** sets a fixed height that we can use when styling the content */
+    height: ${navBarHeight};
+    
+    /** make sure the navbar is in front of the content*/
     z-index: 5;
+    
+    background-color: #888;
+    
 `;
 
 export const Content = styled.div`
-    position: relative;
-    margin-top: 
-    background-color: green;
+    /** leave some space at the top for the navbar */
+    margin-top: ${navBarHeight};
+    
+    /** put the content behind the navbar (smaller z-index)*/
+    z-index: 0;
+    
+    background-color: #EEE;
 `;
 
 
-export const Footer = styled(NavBar)`
-    /* make the Footer always stick to the bottom 
-    position:absolute;
-    bottom:0;
-    width:100%;
-    height:40px;*/
-`;
+interface IWithNavigationProps {
+    /** attached through withRoutes: a list of all the specified <Route /> components in our app */
+    routes: Array<IRoute>,
 
+    /** any children that we get passed from the parent component*/
+    children: any
+}
 
 /**
  * A functional React component as a wrapper for a page with navigation.
- * Renders the page's content in our styled <Frame />
+ * Renders the page's navbar and content
  */
-export default function WithNavigation (props) {
-
-    document.getElementsByTagName("html")[0].style.height = "100%";
-    document.getElementsByTagName("body")[0].style.top = "100vh";
-    document.getElementById("root").style.height = "100%";
-
-    return <Frame>
-        <TopNavBar>
-            Top NavBar
-        </TopNavBar>
-
+function WithNavigation (props: IWithNavigationProps) {
+    return <div>
+        <NavBar>
+            {
+                /** take all the routes of the app ... */
+                props.routes.map((route, i) => (
+                    /**
+                     * ... and transform them into a Link to the respective path,
+                     * each item in the React-dom requires a unique key
+                     */
+                    <Link key={'ROUTE_'+i} to={ route.path }>
+                        {
+                            /** display the name of the <Route /> component*/
+                            route.name
+                        }
+                    </Link>
+                ))
+            }
+        </NavBar>
         <Content>
-            { props.children }
+            {
+                /** show as content whatever we provide */
+                props.children
+            }
         </Content>
-
-        <Footer>
-            Footer
-        </Footer>
-    </Frame>;
-
+    </div>;
 }
+
+export default withRoutes(WithNavigation);

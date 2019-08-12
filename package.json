@@ -9,9 +9,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "infrastructure-components": "^0.2.7",
+    "infrastructure-components": "^0.2.8-alpha.1",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1"
   },
   "devDependencies": {
     "infrastructure-scripts": "^0.2.7",
