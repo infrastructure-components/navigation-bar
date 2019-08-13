@@ -1,32 +1,14 @@
-# Infrastructure-Components: SinglePageApp-Template
+# Infrastructure-Components: Navigation Example
 
-**Create Your Serverless React App**
 
-This project serves as a template of a **Serverless React App** with
-[infrastructure-components](https://github.com/infrastructure-components/infrastructure-components).
+This project accompanies the Medium post:
 
-## Develop Your App
+**How to Create a Navigation Bar With React-Router, Styled-Components, And Infrastructure-Components**
 
-The file `src/index.tsx` serves as entry point of your app. It exports a `SinglePagecApp` component as default.
-This component contains all the configuration you need:
 
-- stackName: the (arbitrary) name of your app, please use only lower case characters and hyphens for the name serves as identifier
-within AWS
-- buildPath: the relative path to the folder within your project, where to put the build-resources, e.g. "build". You may
-want to add this name to your .gitignore file to keep your repository free from compiled files.
-- region: the AWS-region you want your infrastructure to reside after deployment, e.g. 'us-east-1'
+## Install
 
-Your SinglePageApp contains a `Route`-component that specifies the path at runtime and the React-component to be rendered.
-In this case, we render a simple `div`-element. But you can render any React-component.
-
-In order to deploy your app to AWS, you need to specify at least one `<Environment/>` within your `SinglePageApp`-Component.
-The `Environment` can have the following properties:
-
-- name: the (arbitrary) name of your environment, please use only lower case characters and hyphens for the name serves
- as identifier within AWS
-- domain: (optional) a domain that you own and configured in your AWS account, e.g. "my.domain.com"
-- certArn: (optional, required if domain used) the ARN of the certificate that covers your domain
-e.g. `arn:aws:acm:us-east-1:************:certificate/********-****-****-****-************`
+Download/Clone this repository and run `npm i`
 
 
 ### Build
