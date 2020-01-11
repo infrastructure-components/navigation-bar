@@ -13,7 +13,7 @@
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-router": "^5.1.2",
-    "react-router-dom": "^5.1.2",
+    "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
     "infrastructure-scripts": "^0.3.0",
